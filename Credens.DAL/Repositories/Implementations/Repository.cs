@@ -1,18 +1,30 @@
-﻿using Credens.DAL.Repositories.Interface;
+﻿using Credens.DAL.EF;
+using Credens.DAL.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Credens.DAL.Repositories.Implementations
 {
     public class Repository<T> : IRepository<T> where T : class
     {
+        private readonly DbSet<T> _dbSet;
+        private readonly CredensDbContext _context;
+       
+        public Repository(CredensDbContext context)
+        {
+            _context = context;
+            _dbSet = context.Set<T>();
+        }
+        
+
         public void Add(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Add(entity);
         }
 
         public void AddRange(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            _dbSet.AddRange(entities);
         }
 
         public bool Any(Expression<Func<T, bool>> predicate)
