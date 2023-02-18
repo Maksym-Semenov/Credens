@@ -1,13 +1,17 @@
 using Credens.BLL.Implementations;
 using Credens.BLL.Interface;
+using Credens.DAL.Domain.Entities;
 using Credens.DAL.EF;
 using Credens.DAL.Repositories.Implementations;
 using Credens.DAL.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
-using Credens.DAL;
-using Credens.BLL;
 
 var builder = WebApplication.CreateBuilder(args);
+
+User user = new User();
+user.FirstName = "qwe";
+user.LastName = "asd";
+
 
 //builder.Services.AddControllersWithViews();
 
@@ -18,12 +22,8 @@ builder.Services.AddDbContext<CredensDbContext>(options =>
 builder.Services.AddControllersWithViews();
 // Add services to the container.
 
-void ConfigureServices(IServiceCollection services)
-{
-    services.AddTransient< IService<T>, Service<T> >();
-    services.AddTransient < IRepository<T>, Repository<T> >();
-    
-}
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
