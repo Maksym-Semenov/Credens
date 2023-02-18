@@ -20,7 +20,7 @@ namespace Credens.BLL.Implementations
         }
 
 
-        public void Add1(T entity)
+        public void Add(T entity)
         {
             try
             {

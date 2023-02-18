@@ -1,6 +1,6 @@
 ﻿namespace Credens.DAL.Domain.Entities
 {
-    internal class Branch
+    public class Branch
     {
         public int Id { get; set; }
 
