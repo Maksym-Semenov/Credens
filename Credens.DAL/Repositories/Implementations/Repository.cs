@@ -15,7 +15,10 @@ namespace Credens.DAL.Repositories.Implementations
             _context = context;
             _dbSet = context.Set<T>();
         }
-        
+        public IQueryable<T> GetAll()
+        {
+            return _dbSet.AsQueryable<T>();
+        }
 
         public void Add(T entity)
         {
@@ -72,10 +75,7 @@ namespace Credens.DAL.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public IQueryable<T> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public IQueryable<IGrouping<K, T>> GroupBy<K>(Expression<Func<T, K>> predicate)
         {

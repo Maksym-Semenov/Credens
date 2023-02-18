@@ -8,8 +8,9 @@ namespace Credens.BLL.Interface
 {
     public interface IService<T> where T : class
     {
-        public void Add(T entity);
-        public void AddRange(IEnumerable<T> entities);
+        public void MyAdd(T entity);
+        public void MyAddRange(IEnumerable<T> entities);
+        public IQueryable<T> MyGetAll();  
 
     }
 }

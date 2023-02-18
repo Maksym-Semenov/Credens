@@ -19,8 +19,12 @@ namespace Credens.BLL.Implementations
             _repository = repository;
         }
 
+        public IQueryable<T> MyGetAll()
+        {
+            return _repository.GetAll();  
+        }
 
-        public void Add(T entity)
+        public void MyAdd(T entity)
         {
             try
             {
@@ -35,7 +39,7 @@ namespace Credens.BLL.Implementations
             }
         }
 
-        public void AddRange(IEnumerable<T> entities)
+        public void MyAddRange(IEnumerable<T> entities)
         {
             try
             {

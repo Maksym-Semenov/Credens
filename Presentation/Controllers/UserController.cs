@@ -14,12 +14,19 @@ namespace Credens.Presentation.Controllers
             _service = service;
         }
 
-        public IActionResult Index()
-        {
-            User qwerty = new User();
-            _service.Add(qwerty);
+        //public IActionResult Add()
+        //{
+        //    User qwerty = new User();
+        //    _service.Add(qwerty);
             
-            return View();
+        //    return View();
+        //}
+
+        public Task<IActionResult> GetProjects() 
+        {
+            var projects = _service.MyGetAll();
+            
+            return View(projects);
         }
     }
 }
