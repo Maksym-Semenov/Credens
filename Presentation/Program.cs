@@ -8,13 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-User user = new User();
-user.FirstName = "qwe";
-user.LastName = "asd";
-
-
-//builder.Services.AddControllersWithViews();
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AppContext' not found.");
 builder.Services.AddDbContext<CredensDbContext>(options =>
     options.UseSqlServer(connectionString));

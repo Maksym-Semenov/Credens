@@ -8,15 +8,18 @@ namespace Credens.Presentation.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IService<User> _service;
-        public HomeController(IService<User> service)
+        private readonly IService<Project> _service;
+        public HomeController(IService<Project> service)
         {
+
             _service = service;
         }
 
         public IActionResult Index()
         {
-            User qwerty = new User();
+            Project qwerty = new Project();
+            qwerty.Address = "ghjhjkghnm,fdtghethykfvntyjfgntynetyjfgnrtn";
+            qwerty.Descr = "dsafsfgntynetyj rtuwrthy rtyjhwrtyh wrtyurtyhdg";
             _service.Add(qwerty);
             
             return View(qwerty);
