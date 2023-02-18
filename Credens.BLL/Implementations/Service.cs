@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Credens.BLL.Implementations
 {
-    internal class Service<T> : IService<T> where T : class
+    public class Service<T> : IService<T> where T : class
     {
 
         private readonly IRepository<T> _repository;

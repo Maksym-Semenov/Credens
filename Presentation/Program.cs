@@ -1,17 +1,29 @@
+using Credens.BLL.Implementations;
+using Credens.BLL.Interface;
 using Credens.DAL.EF;
+using Credens.DAL.Repositories.Implementations;
+using Credens.DAL.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using Credens.DAL;
+using Credens.BLL;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AppContext' not found.");
-;
+//builder.Services.AddControllersWithViews();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'AppContext' not found.");
 builder.Services.AddDbContext<CredensDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+// Add services to the container.
 
+void ConfigureServices(IServiceCollection services)
+{
+    services.AddTransient< IService<T>, Service<T> >();
+    services.AddTransient < IRepository<T>, Repository<T> >();
+    
+}
 
 var app = builder.Build();
 
@@ -27,7 +39,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

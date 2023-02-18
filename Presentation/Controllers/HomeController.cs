@@ -19,7 +19,7 @@ namespace Credens.Presentation.Controllers
             User qwerty = new User();
             _service.Add(qwerty);
             
-            return View();
+            return View(qwerty);
         }
     }
 }

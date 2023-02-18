@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Credens.BLL\Credens.BLL.csproj" />
+    <ProjectReference Include="..\Credens.DAL\Credens.DAL.csproj" />
   </ItemGroup>
 
 </Project>
