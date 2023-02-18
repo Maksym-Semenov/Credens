@@ -9,6 +9,7 @@ namespace Credens.DAL.Repositories.Interface
 {
     public interface IRepository<T> where T : class
     {
+        public Task<IEnumerable<T>> MySelect();
         /// <summary>
         /// Persists all updates to the data source
         /// </summary>

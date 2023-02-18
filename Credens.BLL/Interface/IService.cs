@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Credens.BLL.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace Credens.BLL.Interface
     {
         public void MyAdd(T entity);
         public void MyAddRange(IEnumerable<T> entities);
-        public IQueryable<T> MyGetAll();  
+        public IQueryable<T> MyGetAll();
+        public Task<Dto<IEnumerable<T>>> MyGet();
 
     }
 }

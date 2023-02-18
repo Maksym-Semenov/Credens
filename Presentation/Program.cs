@@ -1,5 +1,10 @@
+using Credens.BLL.Implementations;
+using Credens.BLL.Interface;
 using Credens.DAL.EF;
+using Credens.DAL.Repositories.Implementations;
+using Credens.DAL.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +13,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<CredensDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+   builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+   builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));   
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

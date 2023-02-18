@@ -15,7 +15,13 @@ namespace Credens.DAL.Repositories.Implementations
             _context = context;
             _dbSet = context.Set<T>();
         }
-        public IQueryable<T> GetAll()
+
+        public async Task<IEnumerable<T>> MySelect()
+        {
+            return await _dbSet.ToListAsync();
+        }
+
+         public IQueryable<T> GetAll()
         {
             return _dbSet.AsQueryable<T>();
         }
