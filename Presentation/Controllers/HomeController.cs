@@ -6,10 +6,10 @@ using System.Collections.Generic;
 
 namespace Credens.Presentation.Controllers
 {
-    public class UserController : Controller
+    public class HomeController : Controller
     {
         private readonly IService<User> _service;
-        public UserController(IService<User> service)
+        public HomeController(IService<User> service)
         {
             _service = service;
         }
