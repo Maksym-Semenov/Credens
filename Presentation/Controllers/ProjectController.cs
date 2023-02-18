@@ -8,9 +8,15 @@ namespace Credens.Presentation.Controllers
     {
         private readonly IService<Project> _service;
 
+        public ProjectController(IService<Project> service)
+        {
+            _service = service;
+        }
+
         public IActionResult MyGet()
         {
-            return View();
+            var a = _service.MyGet();
+            return View(a);
         }
     }
 }

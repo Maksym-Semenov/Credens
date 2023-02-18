@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Credens.BLL\Credens.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Project\" />
+  </ItemGroup>
+
 </Project>

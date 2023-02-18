@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Credens.Presentation.Controllers
 {
-    public class BrunchController : Controller
+    public class BranchController : Controller
     {
         // GET: BrunchController
         public ActionResult Index()

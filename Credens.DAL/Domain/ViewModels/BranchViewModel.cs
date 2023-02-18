@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Credens.DAL.Domain.ViewModels
 {
-    public class UserViewModel
+    public class BranchViewModel
     {
         public int Id { get; set; }
 
-        public string FirstName { get; set; } = null!;
+        public string Location { get; set; } = null!;
 
-        public string? LastName { get; set; }
+        public string? Phone { get; set; }
 
-        public DateTime? Birthday { get; set; }
+        public string? Email { get; set; }
+
     }
 }
