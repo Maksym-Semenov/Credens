@@ -28,6 +28,7 @@ namespace Credens.BLL.Implementations
             try
             {
                 var myObj = await _repository.MySelect();
+
                 if (myObj.Count() == 0)
                 {
                     myDto.Description = "Object are not found";

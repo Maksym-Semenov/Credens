@@ -17,7 +17,7 @@ builder.Services.AddDbContext<CredensDbContext>(options =>
    builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
    builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));   
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
