@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Credens.DAL.Domain.Entities
+namespace Credens.BLL.DTO
 {
-    public class User
+    internal class UserDto
     {
         public int Id { get; set; }
+
+        public string Description { get; set; }
 
         public string FirstName { get; set; } = null!;
 
@@ -17,6 +19,7 @@ namespace Credens.DAL.Domain.Entities
         public DateTime? DateStart { get; set; }
 
         public DateTime? DateFinal { get; set; }
+
         public DateTime? Birthday { get; set; }
     }
 }

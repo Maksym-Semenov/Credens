@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Credens.DAL.EF
 {
-    internal class CredensDbContext : DbContext
+    public class CredensDbContext : DbContext
     {
         public CredensDbContext(DbContextOptions<CredensDbContext> options) : base(options) { }
 

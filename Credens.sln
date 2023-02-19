@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{4FD56563-5E8A-4085-9D1D-CF126AF2B974}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credens.Presentation", "Presentation\Credens.Presentation.csproj", "{4FD56563-5E8A-4085-9D1D-CF126AF2B974}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{000A9BB7-F0DE-418C-A370-4ADB862BBA9D}"
 EndProject

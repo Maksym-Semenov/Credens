@@ -1,8 +1,16 @@
-﻿namespace Credens.DAL.Domain.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Credens.BLL.DTO
 {
-    public class Branch
+    internal class BranchDto
     {
         public int Id { get; set; }
+
+        public string Description { get; set; }
 
         public string Location { get; set; } = null!;
 

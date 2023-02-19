@@ -1,6 +1,12 @@
-﻿namespace Credens.DAL.Domain.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Credens.BLL.DTO
 {
-    public class Project
+    internal class ProjectDto
     {
         public int Id { get; set; }
 
@@ -29,5 +35,7 @@
         public DateTime? DateStart { get; set; }
 
         public DateTime? DateFinal { get; set; }
+        public string Description { get; set; }
+
     }
 }
