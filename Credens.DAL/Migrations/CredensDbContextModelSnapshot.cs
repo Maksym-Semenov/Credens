@@ -100,6 +100,9 @@ namespace Credens.DAL.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone2")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 

@@ -13,10 +13,13 @@ namespace Credens.Presentation.Controllers
             _service = service;
         }
 
+        [HttpGet]
         public IActionResult MyGet()
         {
-            var a = _service.MyGet();
-            return View(a);
+            var rez = _service.GetAll();
+           
+            return View(rez);
         }
+
     }
 }

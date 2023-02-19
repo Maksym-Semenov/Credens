@@ -1,6 +1,7 @@
 ﻿using Credens.DAL.EF;
 using Credens.DAL.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Credens.DAL.Repositories.Implementations
@@ -15,8 +16,22 @@ namespace Credens.DAL.Repositories.Implementations
             _context = context;
             _dbSet = context.Set<T>();
         }
+        public async Task<T> GetAsync(Expression<Func<T,bool>> predicate)
+        {
+            return await _dbSet.FirstAsync(predicate);
+        }
 
-        public async Task<IEnumerable<T>> MySelect()
+        public T Get(Expression<Func<T,bool>> predicate)
+        {
+            return _dbSet.First(predicate);
+        }
+
+        public IEnumerable<T> Select()
+        {
+            return _dbSet.ToList();
+        }
+
+        public async Task<IEnumerable<T>> SelectAsync()
         {
             return await _dbSet.ToListAsync();
         }
@@ -28,7 +43,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public void Add(T entity)
         {
-            _dbSet.Add(entity);
+             _dbSet.Add(entity);
         }
 
         public void AddRange(IEnumerable<T> entities)
@@ -36,49 +51,59 @@ namespace Credens.DAL.Repositories.Implementations
             _dbSet.AddRange(entities);
         }
 
+        public async void AddAsync(T entity)
+        {
+            await _dbSet.AddAsync(entity);
+        }
+
+        public async void AddRangeAsync(IEnumerable<T> entities)
+        {
+            await _dbSet.AddRangeAsync(entities);
+        }
+
         public bool Any(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+           return _dbSet.Any(predicate);
         }
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
         }
 
         public void DeleteRange(IEnumerable<T> entity)
         {
-            throw new NotImplementedException();
+            _dbSet.RemoveRange(entity);
         }
 
         public T Find(params object[] keys)
         {
-            throw new NotImplementedException();
+            return _dbSet.Find(keys);
         }
 
-        public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
+        public async Task<T> FindAsync(params object[] keys)
         {
-            throw new NotImplementedException();
+            return await _dbSet.FindAsync(keys);
         }
 
         public T First(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _dbSet.First(predicate);
         }
 
         public T FirstOrDefault(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _dbSet.FirstOrDefault(predicate);
         }
 
         public T FirstOrDefault()
         {
-            throw new NotImplementedException();
+            return _dbSet.FirstOrDefault();
         }
 
-        public Task<T> FirstOrDefaultAsync()
+        public async Task<T> FirstOrDefaultAsync()
         {
-            throw new NotImplementedException();
+            return await _dbSet.FirstOrDefaultAsync();
         }
 
         
@@ -93,24 +118,30 @@ namespace Credens.DAL.Repositories.Implementations
             throw new NotImplementedException();
         }
 
+
+
         public void RemoveRange(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            _dbSet.RemoveRange(entities);
+        }
+        
+        public void Remove(T entities)
+        {
+            _dbSet.Remove(entities);
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
-        public Task SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
-        }
+            _dbSet.Update(entity);        }
     }
 }

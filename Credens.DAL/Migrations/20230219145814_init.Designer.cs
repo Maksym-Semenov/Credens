@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Credens.DAL.Migrations
 {
     [DbContext(typeof(CredensDbContext))]
-    [Migration("20230218204606_init")]
+    [Migration("20230219145814_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -101,6 +101,9 @@ namespace Credens.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Price")

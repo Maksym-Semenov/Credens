@@ -1,10 +1,14 @@
-﻿namespace Credens.DAL.Domain.Entities
+﻿using Credens.DAL.Domain.Enums;
+
+namespace Credens.DAL.Domain.Entities
 {
     public class Project
     {
         public int Id { get; set; }
 
-        public string OrderNum { get; set; } = null!;
+        public string? OrderNum { get; set; } = null!;
+       
+        public bool IsOrder { get; set; }
 
         public string Name { get; set; } = null!;
 
@@ -18,6 +22,8 @@
 
         public string? Phone { get; set; }
 
+        public string? Phone2 { get; set; } 
+
         public string? Email { get; set; }
 
         public string? FioDesigner { get; set; }
@@ -25,6 +31,8 @@
         public string? FioMaker { get; set; }
 
         public int? IsCompleted { get; set; }
+
+        public OrderStatus OrderStatus { get; set; }
 
         public DateTime? DateStart { get; set; }
 

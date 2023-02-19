@@ -2,7 +2,12 @@
 {
     public class Branch
     {
+        public Branch() 
+        { }
+
         public int Id { get; set; }
+
+        public string Name { get; set; }
 
         public string Location { get; set; } = null!;
 
@@ -10,7 +15,7 @@
 
         public string? Email { get; set; }
 
-        public int? IsOpen { get; set; }
+        public bool? IsOpen { get; set; }
 
         public DateTime? DateStart { get; set; }
 

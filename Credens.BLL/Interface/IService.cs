@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,10 +10,22 @@ namespace Credens.BLL.Interface
 {
     public interface IService<T> where T : class
     {
-        public void MyAdd(T entity);
-        public void MyAddRange(IEnumerable<T> entities);
-        public IQueryable<T> MyGetAll();
-        public Task<Dto<IEnumerable<T>>> MyGet();
+        public void Create(T entity);
 
+        public void AddRange(IEnumerable<T> entities);
+
+        public Dto<IQueryable<T>> GetAll();
+
+        public Task<Dto<IEnumerable<T>>> GetList();
+
+        public Task<Dto<T>> GetAsync(Expression<Func<T, bool>> predicate);
+
+        public Dto<T> Get(Expression<Func<T, bool>> predicate);
+
+        public void Delete(T entity);
+
+        public void DeleteAll();
+
+        public void Update(T entity);
     }
 }
