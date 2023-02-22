@@ -34,25 +34,24 @@ namespace Credens.BLL.Implementations
                 if (myObj.Count() == 0)
                 {
                     myDto.Description = "Object are not found";
+                    return myDto;
                 }
                 myDto.Data = myObj;
                 myDto.Description = "All right!";
             }
             catch(Exception ex)
             {
-                new Dto<T>()
+                new  Dto<IEnumerable<T>>()
                 {
                     Description = ex.Message
                 };
             }
             return myDto;
-            
         }
 
-      
         public Dto<IQueryable<T>> GetAll()
         {
-            var myDto = new Dto<T>();
+            var myDto = new Dto<IQueryable<T>>();
             try
             {
                 var myObj = _repository.GetAll();
@@ -60,13 +59,13 @@ namespace Credens.BLL.Implementations
                 {
                     myDto.Description = "Object not faund";
                 }
-                myDto.Data = myObj as T;
+                myDto.Data = myObj;
             }
             catch(Exception ex)
             {
                 new Dto<IQueryable<T>>() { };
             }
-            return myDto as Dto<IQueryable<T>>;
+            return myDto;
         }
 
         public void Create(T entity)

@@ -6,11 +6,11 @@ namespace Credens.DAL.Domain.Entities
     {
         public int Id { get; set; }
 
-        public string? OrderNum { get; set; } = null!;
+        public string? OrderNum { get; set; } 
        
-        public bool IsOrder { get; set; }
+       // public bool IsOrder { get; set; }
 
-        public string Name { get; set; } = null!;
+        public string Name { get; set; }
 
         public string? Price { get; set; }
 
@@ -32,7 +32,7 @@ namespace Credens.DAL.Domain.Entities
 
         public int? IsCompleted { get; set; }
 
-        public OrderStatus OrderStatus { get; set; }
+       // public OrderStatus OrderStatus { get; set; }
 
         public DateTime? DateStart { get; set; }
 

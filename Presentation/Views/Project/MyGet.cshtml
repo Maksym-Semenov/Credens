@@ -1,5 +1,5 @@
 ﻿
-@model Credens.BLL.DTO.Dto<IQueryable<Project>>
+@model IQueryable<Credens.DAL.Domain.Entities.Project>
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,10 +10,11 @@
 </div>
 
 <div>
-    @foreach(var ob in Model.Data)
+    @foreach(var ob in Model)
     {
         <p> @ob.Fio</p>
         <p> @ob.Name</p>
+        <p> @ob.Address</p>
         <p> @ob.Price</p>
     }
 </div>

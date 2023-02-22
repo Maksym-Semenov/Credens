@@ -14,11 +14,19 @@ namespace Credens.Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult MyGet()
+        public IActionResult MyGet(int id)
         {
             var rez = _service.GetAll();
-           
-            return View(rez);
+           var a = rez.Data.Where(x => x.Id == id);
+            return View(a);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyGet2() 
+        { 
+             var  rez = await _service.GetList();
+            
+             return View(rez);
         }
 
     }

@@ -1,0 +1,21 @@
+﻿
+@model Credens.BLL.DTO.Dto<IEnumerable<Project>>
+
+@{
+    ViewData["Title"] = "MyGet2";
+}
+
+<div class="text-center">
+    <h1 class="display-4">MyGet2</h1>
+    <p>HOHOHOHO</p>
+</div>
+
+<div>
+    @foreach(var ob in Model.Data)
+    {
+        <p> @ob.Fio</p>
+        <p> @ob.Name</p>
+        <p> @ob.Price</p>
+   
+    }
+</div>

@@ -8,6 +8,7 @@ namespace Credens.BLL.DTO
 {
     public class Dto<T>
     {
+        public int ID { get; set; } 
         public string Description { get; set; }
         public T Data { get; set; }
      

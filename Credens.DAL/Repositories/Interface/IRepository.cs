@@ -11,7 +11,7 @@ namespace Credens.DAL.Repositories.Interface
     {
         public IEnumerable<T> Select();
 
-        public Task<IEnumerable<T>> SelectAsync();
+        public Task<List<T>> SelectAsync();
 
         public T Get(Expression<Func<T,bool>> predicate);
 

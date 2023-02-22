@@ -31,7 +31,7 @@ namespace Credens.DAL.Repositories.Implementations
             return _dbSet.ToList();
         }
 
-        public async Task<IEnumerable<T>> SelectAsync()
+        public async Task<List<T>> SelectAsync()
         {
             return await _dbSet.ToListAsync();
         }
