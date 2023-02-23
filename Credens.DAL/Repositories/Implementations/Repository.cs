@@ -51,9 +51,11 @@ namespace Credens.DAL.Repositories.Implementations
             _dbSet.AddRange(entities);
         }
 
-        public async void AddAsync(T entity)
+        public async Task<bool> AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
+
+            return true;
         }
 
         public async void AddRangeAsync(IEnumerable<T> entities)
@@ -142,6 +144,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public void Update(T entity)
         {
-            _dbSet.Update(entity);        }
+            _dbSet.Update(entity);       
+        }
     }
 }

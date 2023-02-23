@@ -63,11 +63,12 @@ namespace Credens.BLL.Implementations
             }
             catch(Exception ex)
             {
-                new Dto<IQueryable<T>>() { };
+                new Dto<IQueryable<T>>() {Description = ex.Message };
             }
             return myDto;
         }
-
+        
+        
         public void Create(T entity)
         {
             try
@@ -80,8 +81,26 @@ namespace Credens.BLL.Implementations
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                new Dto<T>() { Description = ex.Message };
             }
+            
+        }
+
+        public async Task<bool> CreateAsync(T entity)
+        {
+            try
+            {
+                if (entity != null)
+                {
+                     await _repository.AddAsync(entity);
+                     await _repository.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                new Dto<T>() { Description = ex.Message };
+            }
+            return true;
         }
 
         public void AddRange(IEnumerable<T> entities)

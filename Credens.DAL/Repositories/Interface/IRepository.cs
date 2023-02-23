@@ -41,7 +41,7 @@ namespace Credens.DAL.Repositories.Interface
 
         void AddRange(IEnumerable<T> entities);
         
-        void AddAsync(T entity);
+        Task<bool> AddAsync(T entity);
 
         void AddRangeAsync(IEnumerable<T> entities);
 

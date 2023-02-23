@@ -11,6 +11,8 @@ namespace Credens.BLL.Interface
     public interface IService<T> where T : class
     {
         public void Create(T entity);
+        
+        public Task<bool> CreateAsync(T entity);
 
         public void AddRange(IEnumerable<T> entities);
 
