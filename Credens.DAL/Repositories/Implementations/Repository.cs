@@ -1,7 +1,6 @@
 ﻿using Credens.DAL.EF;
 using Credens.DAL.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Credens.DAL.Repositories.Implementations

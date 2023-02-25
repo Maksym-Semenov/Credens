@@ -24,51 +24,52 @@ namespace Credens.BLL.Implementations
             _repository = repository;
         }
 
-        public async Task<Dto<IEnumerable<T>>> GetList()
+        public async Task<DTO<IEnumerable<T>>> GetList()
         {
-            var myDto = new Dto<IEnumerable<T>>();
+            var dto = new DTO<IEnumerable<T>>();
             try
             {
-                var myObj = await _repository.SelectAsync();
+                var repObjects = await _repository.SelectAsync();
 
-                if (myObj.Count() == 0)
+                if (repObjects.Count() == 0)
                 {
-                    myDto.Description = "Object are not found";
-                    return myDto;
+                    dto.Description = "Object not found";
+                    return dto;
                 }
-                myDto.Data = myObj;
-                myDto.Description = "All right!";
+                dto.Data = repObjects;
+                dto.Description = "Object is found";
             }
             catch(Exception ex)
             {
-                new  Dto<IEnumerable<T>>()
+                new  DTO<IEnumerable<T>>()
                 {
                     Description = ex.Message
                 };
             }
-            return myDto;
+            return dto;
         }
 
-        public Dto<IQueryable<T>> GetAll()
+        public DTO<IQueryable<T>> GetAll()
         {
-            var myDto = new Dto<IQueryable<T>>();
+            var dto = new DTO<IQueryable<T>>();
+            IQueryable<T> a = new IQueryable<T>();
             try
             {
-                var myObj = _repository.GetAll();
-                if(myObj.Count() == 0)
+                var repObjects = ;
+                if(repObjects.Count() == 0)
                 {
-                    myDto.Description = "Object not faund";
+                    dto.Description = "Objects was not faund";
                 }
-                myDto.Data = myObj;
+                dto.Data = repObjects;
+             
             }
             catch(Exception ex)
             {
-                new Dto<IQueryable<T>>() {Description = ex.Message };
+                new DTO<IQueryable<T>>() {Description = ex.Message };
             }
-            return myDto;
+            return dto;
         }
-        
-        
+
         public void Create(T entity)
         {
             try
@@ -81,7 +82,7 @@ namespace Credens.BLL.Implementations
             }
             catch (Exception ex)
             {
-                new Dto<T>() { Description = ex.Message };
+                new DTO<T>() { Description = ex.Message };
             }
             
         }
@@ -98,7 +99,7 @@ namespace Credens.BLL.Implementations
             }
             catch (Exception ex)
             {
-                new Dto<T>() { Description = ex.Message };
+                new DTO<T>() { Description = ex.Message };
             }
             return true;
         }
@@ -119,46 +120,46 @@ namespace Credens.BLL.Implementations
             }
         }
 
-        public Dto<T> Get(Expression<Func<T, bool>> predicate)
+        public DTO<T> Get(Expression<Func<T, bool>> predicate)
         {
-            var myDto = new Dto<T>();
+            var dto = new DTO<T>();
             try
             {
-                var myObj = _repository.Get(predicate); 
-                if (myObj != null)
+                var repObjects = _repository.Get(predicate); 
+                if (repObjects != null)
                 {
-                    myDto.Description = "Object not faund";
+                    dto.Description = "Object not faund";
                 }
-                myDto.Data = myObj;
+                dto.Data = repObjects;
             }
             catch (Exception ex) 
             {
-                 new Dto<T>()
+                 new DTO<T>()
                 { Description = ex.Message };
             }
-            return myDto;
+            return dto;
         }
 
-        public async Task<Dto<T>> GetAsync(Expression<Func<T, bool>> predicate)
+        public async Task<DTO<T>> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            var myDto = new Dto<T>();
+            var dto = new DTO<T>();
             try
             {
-                var myObj = await _repository.GetAsync(predicate);
-                if (myObj != null)
+                var repObjects = await _repository.GetAsync(predicate);
+                if (repObjects != null)
                 {
-                    myDto.Description = "Object not faund";
+                    dto.Description = "Object not faund";
                 }
-                myDto.Data = myObj;
+                dto.Data = repObjects;
             }
             catch (Exception ex)
             {
-                new Dto<T>()
+                new DTO<T>()
                 { 
                     Description = ex.Message
                 };
             }
-            return myDto;
+            return dto;
         }
 
         public void Delete(T entity)
@@ -169,7 +170,7 @@ namespace Credens.BLL.Implementations
 
         public void DeleteAll()
         {
-           //_repository.RemoveRange(GetAll());
+           _repository.RemoveRange(_repository.Select());
            _repository.SaveChanges();
         }
 

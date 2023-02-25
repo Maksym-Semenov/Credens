@@ -8,18 +8,14 @@ namespace Credens.DAL.Domain.Entities
 {
     public class User
     {
-        public int Id { get; set; }
-
-        public string FirstName { get; set; } = null!;
-
-        public string MiddleName { get; set; } = null!;
-
-        public string? LastName { get; set; }
-
-        public DateTime? DateStart { get; set; }
-
-        public DateTime? DateFinal { get; set; }
+        public int UserId { get; set; }  
         
-        public DateTime? Birthday { get; set; }
+        public string? FirstName { get; set; }  
+        
+        public string? MiddleName { get; set; }   
+        
+        public string? LastName { get; set; }   
+        
+        public int? UserRole { get; set; }
     }
 }

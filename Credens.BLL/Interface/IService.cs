@@ -16,18 +16,19 @@ namespace Credens.BLL.Interface
 
         public void AddRange(IEnumerable<T> entities);
 
-        public Dto<IQueryable<T>> GetAll();
+        public DTO<IQueryable<T>> GetAll();
 
-        public Task<Dto<IEnumerable<T>>> GetList();
+        public Task<DTO<IEnumerable<T>>> GetList();
 
-        public Task<Dto<T>> GetAsync(Expression<Func<T, bool>> predicate);
+        public Task<DTO<T>> GetAsync(Expression<Func<T, bool>> predicate);
 
-        public Dto<T> Get(Expression<Func<T, bool>> predicate);
+        public DTO<T> Get(Expression<Func<T, bool>> predicate);
 
         public void Delete(T entity);
 
         public void DeleteAll();
 
         public void Update(T entity);
+
     }
 }

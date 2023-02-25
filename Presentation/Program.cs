@@ -14,11 +14,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<CredensDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-   builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
-   builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));   
-
-
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 
 var app = builder.Build();
 

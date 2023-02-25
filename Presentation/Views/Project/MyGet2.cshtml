@@ -1,5 +1,5 @@
 ﻿
-@model Credens.BLL.DTO.Dto<IEnumerable<Project>>
+@model Credens.BLL.DTO.DTO<IEnumerable<Project>>
 
 @{
     ViewData["Title"] = "MyGet2";
@@ -13,8 +13,8 @@
 <div>
     @foreach(var ob in Model.Data)
     {
-        <p> @ob.Fio</p>
-        <p> @ob.Name</p>
+        <p> @ob.OrderName</p>
+        <p> @ob.City</p>
         <p> @ob.Price</p>
    
     }
