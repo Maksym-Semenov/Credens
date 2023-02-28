@@ -1,10 +1,14 @@
+using AutoMapper;
 using Credens.BLL.Implementations;
-using Credens.BLL.Interface;
+using Credens.DAL.AutoMapper;
+using Credens.DAL.Domain.Entities;
 using Credens.DAL.EF;
 using Credens.DAL.Repositories.Implementations;
-using Credens.DAL.Repositories.Interface;
+using Credens.Infrastructure.DTO;
+using Credens.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Security.Cryptography;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,11 +18,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<CredensDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddScoped(typeof(IService<ProjectDTO>), typeof(ProjectService));
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IRepository<ProjectDTO>), typeof(ProjectRepository));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 var app = builder.Build();

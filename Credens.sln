@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{D81D5DE0-06D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credens.BLL", "Credens.BLL\Credens.BLL.csproj", "{B0ADA128-82B9-47A7-B07B-FC1679EB9BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credens.Contract", "Credens.Contract\Credens.Contract.csproj", "{D9F82E63-7E42-4D7E-9C28-AED3440AA7FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credens.Infrastructure", "Credens.Contract\Credens.Infrastructure.csproj", "{D9F82E63-7E42-4D7E-9C28-AED3440AA7FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

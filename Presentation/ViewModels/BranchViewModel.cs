@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Credens.DAL.Domain.ViewModels
+namespace Credens.Presentation.ViewModels
 {
     public class BranchViewModel
     {

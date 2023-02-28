@@ -1,61 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Credens.Infrastructure.DTO;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Credens.DAL.Repositories.Interface
+namespace Credens.Infrastructure.Interface
 {
     public interface IRepository<T> where T : class
     {
-        public IEnumerable<T> Select();
+        public Task<IEnumerable<T>> GetListAsync();
+        public IQueryable<T> GetAll();
+        public T GetById(int id);
 
-        public Task<List<T>> SelectAsync();
+        //public Task<List<T>> SelectAsync();
 
-        public T Get(Expression<Func<T,bool>> predicate);
+        //public T Get(Expression<Func<T,bool>> predicate);
 
-        public Task<T> GetAsync(Expression<Func<T, bool>> predicate);
+        //public Task<T> GetAsync(Expression<Func<T, bool>> predicate);
 
-        void SaveChanges();
+        //void SaveChanges();
 
-        Task SaveChangesAsync();
+        //Task SaveChangesAsync();
  
-        T First(Expression<Func<T, bool>> predicate);
+        //T First(Expression<Func<T, bool>> predicate);
 
-        T FirstOrDefault(Expression<Func<T, bool>> predicate);
+        //T FirstOrDefault(Expression<Func<T, bool>> predicate);
 
-        T FirstOrDefault();
+        //T FirstOrDefault();
 
-        Task<T> FirstOrDefaultAsync();
+        //Task<T> FirstOrDefaultAsync();
 
-        IQueryable<T> GetAll();
+        //IQueryable<T> GetAll();
 
-        bool Any(Expression<Func<T, bool>> predicate);
+        //bool Any(Expression<Func<T, bool>> predicate);
 
-        T Find(params object[] keys);
+        //T Find(params object[] keys);
 
-        Task<T> FindAsync(params object[] keys);
+        //Task<T> FindAsync(params object[] keys);
 
-        void Add(T entity);
+        //void Add(T entity);
 
-        void AddRange(IEnumerable<T> entities);
+        //void AddRange(IEnumerable<T> entities);
         
-        Task<bool> AddAsync(T entity);
+        //Task<bool> AddAsync(T entity);
 
-        void AddRangeAsync(IEnumerable<T> entities);
+        //void AddRangeAsync(IEnumerable<T> entities);
 
-        void Delete(T entity);
+        //void Delete(T entity);
 
-        void DeleteRange(IEnumerable<T> entity);
+        //void DeleteRange(IEnumerable<T> entity);
 
-        void Update(T entity);
+        //void Update(T entity);
 
-        IOrderedQueryable<T> OrderBy<K>(Expression<Func<T, K>> predicate);
+        //IOrderedQueryable<T> OrderBy<K>(Expression<Func<T, K>> predicate);
 
-        IQueryable<IGrouping<K, T>> GroupBy<K>(Expression<Func<T, K>> predicate);
+        //IQueryable<IGrouping<K, T>> GroupBy<K>(Expression<Func<T, K>> predicate);
 
-        void RemoveRange(IEnumerable<T> entities);
-        void Remove(T entitie);
+        //void RemoveRange(IEnumerable<T> entities);
+        //void Remove(T entitie);
     }
 }
