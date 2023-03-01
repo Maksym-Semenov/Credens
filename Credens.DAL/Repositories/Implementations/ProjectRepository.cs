@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using Credens.DAL.AutoMapper;
 using Credens.DAL.Domain.Entities;
 using Credens.DAL.EF;
 using Credens.Infrastructure.DTO;
@@ -12,11 +13,9 @@ namespace Credens.DAL.Repositories.Implementations
     {
         private readonly DbSet<Project> _dbSet;
         private readonly CredensDbContext _context;
-        private readonly IMapper _mapper;
         
-        public ProjectRepository(CredensDbContext context, IMapper mapper)
+        public ProjectRepository(CredensDbContext context)
         {
-            _mapper= mapper;
             _context = context;
             _dbSet = context.Set<Project>();
         }
@@ -45,8 +44,9 @@ namespace Credens.DAL.Repositories.Implementations
 
         public async Task<IEnumerable<ProjectDTO>> GetListAsync()
         {
-            var rezult = _mapper.Map<IEnumerable<ProjectDTO>>(await _dbSet.ToListAsync());
-           
+            var confMapper = new MapperConfiguration(x => x.CreateMap<Project, ProjectDTO>());
+            var mapper = new Mapper(confMapper);
+            var rezult = mapper.Map<IEnumerable<ProjectDTO>>(await _dbSet.ToListAsync()); 
             return rezult;
         }
 

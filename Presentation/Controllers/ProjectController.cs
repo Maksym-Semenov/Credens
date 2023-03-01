@@ -10,18 +10,22 @@ namespace Credens.Presentation.Controllers
     public class ProjectController : Controller
     {
         private readonly IService<ProjectDTO> _service;
-        private readonly IMapper _mapper;
 
-        public ProjectController(IService<ProjectDTO> service, IMapper mapper)
+        public ProjectController(IService<ProjectDTO> service)
         {
             _service = service;
-            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var rez = _mapper.Map<IEnumerable<ProjectViewModel>> (await _service.GetListAsync());  
+            var configMapper = new MapperConfiguration(x => x.CreateMap<ProjectViewModel, ProjectDTO>()
+            .ForMember(x => x.OrderName, k => k.MapFrom(v => v.Name))
+            .ForMember(x => x.Price, k => k.MapFrom(v => v.Price))
+            .ForMember(x => x.ProjectId, k => k.MapFrom(v => v.Id)));
+
+            var mapper = new Mapper(configMapper);
+            var rez = mapper.Map<IEnumerable<ProjectViewModel>>(await _service.GetListAsync());
             return View(rez);
         }
 

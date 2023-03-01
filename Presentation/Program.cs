@@ -1,14 +1,10 @@
-using AutoMapper;
 using Credens.BLL.Implementations;
-using Credens.DAL.AutoMapper;
-using Credens.DAL.Domain.Entities;
 using Credens.DAL.EF;
 using Credens.DAL.Repositories.Implementations;
 using Credens.Infrastructure.DTO;
 using Credens.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System.Security.Cryptography;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

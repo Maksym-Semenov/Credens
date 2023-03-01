@@ -10,9 +10,6 @@ namespace Credens.DAL.AutoMapper
         {
             var mapperConfig = new MapperConfiguration(x => x.CreateMap<Project, ProjectDTO>()
             .ForMember(x => x.Floor, x => x.MapFrom(x => x.OrderValue)));
-
-            //var mapper = new Mapper(mapperConfig);
-            
         }
     }
 }
