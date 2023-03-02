@@ -11,18 +11,21 @@ namespace Credens.DAL.Repositories.Implementations
 {
     public class ProjectRepository : IRepository<ProjectDTO>
     {
+        private readonly IMapper _mapper;
         private readonly DbSet<Project> _dbSet;
         private readonly CredensDbContext _context;
         
         public ProjectRepository(CredensDbContext context)
         {
+            _mapper = ProjectMapToProjectDTO.MapperInit();
             _context = context;
             _dbSet = context.Set<Project>();
         }
 
         public IQueryable<ProjectDTO> GetAll()
         {
-            throw new NotImplementedException();
+            var rez =_mapper.Map<IQueryable<ProjectDTO>>(_context.Projects.AsQueryable());
+            return rez;
         }
 
         public ProjectDTO GetById(int id)
@@ -44,9 +47,8 @@ namespace Credens.DAL.Repositories.Implementations
 
         public async Task<IEnumerable<ProjectDTO>> GetListAsync()
         {
-            var confMapper = new MapperConfiguration(x => x.CreateMap<Project, ProjectDTO>());
-            var mapper = new Mapper(confMapper);
-            var rezult = mapper.Map<IEnumerable<ProjectDTO>>(await _dbSet.ToListAsync()); 
+            var rezult = _mapper.Map<IEnumerable<ProjectDTO>>(await _dbSet.ToListAsync()); 
+            
             return rezult;
         }
 

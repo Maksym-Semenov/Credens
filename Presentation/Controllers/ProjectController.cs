@@ -2,6 +2,7 @@
 using AutoMapper;
 using Credens.Infrastructure.DTO;
 using Credens.Infrastructure.Interface;
+using Credens.Presentation.AutoMapper;
 using Credens.Presentation.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,22 +11,29 @@ namespace Credens.Presentation.Controllers
     public class ProjectController : Controller
     {
         private readonly IService<ProjectDTO> _service;
+        private readonly IMapper _mapper;
 
         public ProjectController(IService<ProjectDTO> service)
         {
             _service = service;
+            _mapper = ProjectDTOMupToProjectViewModel.InitAutomapper();
+        }
+
+        [HttpGet]
+        public  IActionResult Index1()
+        {
+            var rez = _mapper.Map<IQueryable<ProjectViewModel>>(_service.GetAll());
+            
+            return View(rez);
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var configMapper = new MapperConfiguration(x => x.CreateMap<ProjectViewModel, ProjectDTO>()
-            .ForMember(x => x.OrderName, k => k.MapFrom(v => v.Name))
-            .ForMember(x => x.Price, k => k.MapFrom(v => v.Price))
-            .ForMember(x => x.ProjectId, k => k.MapFrom(v => v.Id)));
+            _mapper.Map<IEnumerable<ProjectViewModel>>(await _service.GetListAsync());
 
-            var mapper = new Mapper(configMapper);
-            var rez = mapper.Map<IEnumerable<ProjectViewModel>>(await _service.GetListAsync());
+            var rez = await _service.GetListAsync();
+            
             return View(rez);
         }
 
@@ -40,7 +48,7 @@ namespace Credens.Presentation.Controllers
         //public async Task<IActionResult> Index() 
         //{
         //    var rez = await _service.GetList();
-            
+
         //     return View(rez.Data);
         //}
 

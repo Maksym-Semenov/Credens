@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Credens.Infrastructure.DTO.ProjectDTO>
+﻿@model IQueryable<Credens.Presentation.ViewModels.ProjectViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,7 +9,7 @@
 
 @foreach(var obj in Model)
 {
-    <p>@obj.OrderName</p>
+    <p>@obj.Name</p>
     <p>@obj.Price</p>
-    <p>@obj.OrderValue</p>
+    <p>@obj.Id</p>
 }
