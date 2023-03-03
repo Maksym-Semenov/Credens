@@ -4,14 +4,12 @@ using Credens.Infrastructure.DTO;
 
 namespace Credens.DAL.AutoMapper
 {
-    public static class ProjectMapToProjectDTO 
+    public class CredensMapper<TIn, TOut> 
     {
         public static Mapper MapperInit() 
         {
-            var mapperConfig = new MapperConfiguration(x => x.CreateMap<Project, ProjectDTO>()
-            .ForMember(x => x.Floor, x => x.MapFrom(x => x.OrderValue)));
+            var mapperConfig = new MapperConfiguration(x => x.CreateMap<TIn, TOut>());
             var mapper = new Mapper(mapperConfig);
-           
             return mapper;
         }
     }

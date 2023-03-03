@@ -1,59 +1,30 @@
-﻿using Credens.Infrastructure.DTO;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Credens.Infrastructure.Interface
 {
     public interface IRepository<T> where T : class
     {
         public Task<IEnumerable<T>> GetListAsync();
-        public IQueryable<T> GetAll();
-        public T GetById(int id);
-
-        //public Task<List<T>> SelectAsync();
-
-        //public T Get(Expression<Func<T,bool>> predicate);
-
-        //public Task<T> GetAsync(Expression<Func<T, bool>> predicate);
-
-        //void SaveChanges();
-
-        //Task SaveChangesAsync();
- 
-        //T First(Expression<Func<T, bool>> predicate);
-
-        //T FirstOrDefault(Expression<Func<T, bool>> predicate);
-
-        //T FirstOrDefault();
-
-        //Task<T> FirstOrDefaultAsync();
-
-        //IQueryable<T> GetAll();
-
-        //bool Any(Expression<Func<T, bool>> predicate);
-
-        //T Find(params object[] keys);
-
-        //Task<T> FindAsync(params object[] keys);
-
-        //void Add(T entity);
-
-        //void AddRange(IEnumerable<T> entities);
         
-        //Task<bool> AddAsync(T entity);
+        public IQueryable<T> GetAll();
 
-        //void AddRangeAsync(IEnumerable<T> entities);
+        public T Get(Expression<Func<T,bool>> predicate);
 
-        //void Delete(T entity);
+        public Task<T> GetAsync(Expression<Func<T, bool>> predicate);
 
-        //void DeleteRange(IEnumerable<T> entity);
+        void SaveChanges();
 
-        //void Update(T entity);
+        Task SaveChangesAsync();
 
-        //IOrderedQueryable<T> OrderBy<K>(Expression<Func<T, K>> predicate);
+        void Add(T entity);
+        
+        Task AddAsync(T entity);
 
-        //IQueryable<IGrouping<K, T>> GroupBy<K>(Expression<Func<T, K>> predicate);
+        void Delete(T entity);
 
-        //void RemoveRange(IEnumerable<T> entities);
-        //void Remove(T entitie);
+        void DeleteRange(IEnumerable<T> entity);
+
+        void Update(T entity);
+
     }
 }

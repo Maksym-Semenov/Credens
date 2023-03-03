@@ -1,33 +1,60 @@
 ﻿using Credens.Infrastructure.DTO;
 using Credens.Infrastructure.Interface;
+using System.Linq.Expressions;
 
 namespace Credens.BLL.Implementations
 {
     public class ProjectService : IService<ProjectDTO>
     {
-
         private readonly IRepository<ProjectDTO> _repository;
 
         public ProjectService(IRepository<ProjectDTO> repository)
         {
             _repository = repository;
         }
-
       
         public IQueryable<ProjectDTO> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public ProjectDTO GetById(int id)
+        public void Create(ProjectDTO entity)
         {
-            return _repository.GetById(id);
+           _repository.Add(entity);
+        }
+
+        public async Task CreateAsync(ProjectDTO entity)
+        {
+            await _repository.AddAsync(entity);
+        }
+        
+        public void Update(ProjectDTO entity)
+        {
+            _repository.Update(entity);
         }
 
         public async Task<IEnumerable<ProjectDTO>> GetListAsync()
         {
            return await _repository.GetListAsync();
         }
+
+        public void Delete(ProjectDTO entity)
+        {
+            _repository.Delete(entity);
+        }
+
+        public async Task<ProjectDTO> GetAsync(Expression<Func<ProjectDTO, bool>> predicate)
+        {
+            return await _repository.GetAsync(predicate);
+        }
+
+        public ProjectDTO Get(Expression<Func<ProjectDTO, bool>> predicate)
+        {
+            return _repository.Get(predicate);
+        }
+
+
+
 
         //    public async Task<ProjectDTO<IEnumerable<T>>> GetList()
         //    {
