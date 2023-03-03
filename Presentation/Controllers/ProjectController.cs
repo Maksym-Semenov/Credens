@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Credens.Infrastructure.DTO;
 using Credens.Infrastructure.Interface;
 using Credens.Presentation.AutoMapper;
@@ -22,7 +23,7 @@ namespace Credens.Presentation.Controllers
         [HttpGet]
         public  IActionResult Index1()
         {
-            var rez = _mapper.Map<IQueryable<ProjectViewModel>>(_service.GetAll());
+            var rez = _service.GetAll().ProjectTo<ProjectViewModel>(_mapper.ConfigurationProvider);
             
             return View(rez);
         }
@@ -30,10 +31,8 @@ namespace Credens.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            _mapper.Map<IEnumerable<ProjectViewModel>>(await _service.GetListAsync());
+            var rez = _mapper.Map<IEnumerable<ProjectViewModel>>(await _service.GetListAsync());
 
-            var rez = await _service.GetListAsync();
-            
             return View(rez);
         }
 

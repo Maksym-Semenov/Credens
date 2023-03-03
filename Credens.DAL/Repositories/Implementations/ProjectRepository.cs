@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Credens.DAL.AutoMapper;
 using Credens.DAL.Domain.Entities;
 using Credens.DAL.EF;
@@ -24,7 +25,8 @@ namespace Credens.DAL.Repositories.Implementations
 
         public IQueryable<ProjectDTO> GetAll()
         {
-            var rez =_mapper.Map<IQueryable<ProjectDTO>>(_context.Projects.AsQueryable());
+            //var rez =_mapper.Map<IQueryable<ProjectDTO>>(_context.Projects.AsQueryable());
+            var rez = _dbSet.ProjectTo<ProjectDTO>(_mapper.ConfigurationProvider);
             return rez;
         }
 
