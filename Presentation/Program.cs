@@ -19,7 +19,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped(typeof(IService<ProjectDTO>), typeof(ProjectService));
 
-builder.Services.AddScoped(typeof(IRepository<ProjectDTO>), typeof(ProjectRepository));
+builder.Services.AddScoped(typeof(IRepository<ProjectDTO>), typeof(Repository));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
