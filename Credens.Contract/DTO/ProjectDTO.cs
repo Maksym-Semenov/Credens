@@ -3,7 +3,7 @@ using Credens.Infrastructure.Interface;
 
 namespace Credens.Infrastructure.DTO
 {
-    public class ProjectDTO : IMyDTO
+    public class ProjectDTO 
     {
         public int ProjectId { get; set; }
 

@@ -3,7 +3,7 @@ using Credens.Infrastructure.Interface;
 
 namespace Credens.DAL.Domain.Entities
 {
-    public class Project : IMyEntity
+    public class Project 
     {
         public Project() { }
             public int ProjectId { get; set; }

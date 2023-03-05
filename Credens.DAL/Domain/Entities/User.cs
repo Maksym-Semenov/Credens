@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Credens.DAL.Domain.Entities
 {
-    public class User :IMyEntity
+    public class User 
     {
         public User(){}
         public int UserId { get; set; }  

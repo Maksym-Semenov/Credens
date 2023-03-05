@@ -2,7 +2,7 @@
 
 namespace Credens.DAL.Domain.Entities
 {
-    public class Branch : IMyEntity
+    public class Branch 
     {
         public Branch() { }
         public int BranchId { get; set; }
