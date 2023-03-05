@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Credens.Infrastructure.Interface
 {
-    public class IMyEntity
+    public interface IMyDTO
     {
     }
 }

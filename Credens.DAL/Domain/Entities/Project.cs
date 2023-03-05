@@ -1,8 +1,11 @@
 ﻿
+using Credens.Infrastructure.Interface;
+
 namespace Credens.DAL.Domain.Entities
 {
-    public class Project
+    public class Project : IMyEntity
     {
+        public Project() { }
             public int ProjectId { get; set; }
 
             public int? OrderValue { get; set; }

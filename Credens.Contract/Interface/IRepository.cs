@@ -2,13 +2,13 @@
 
 namespace Credens.Infrastructure.Interface
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T>   where T : class, new()
     {
         public Task<IEnumerable<T>> GetListAsync();
         
         public IQueryable<T> GetAll();
 
-        public T Get(Expression<Func<T,bool>> predicate);
+        public T Get(Expression<Func<T, bool>> predicate);
 
         public Task<T> GetAsync(Expression<Func<T, bool>> predicate);
 

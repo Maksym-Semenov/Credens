@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Credens.Infrastructure.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Credens.DAL.Domain.Entities
 {
-    public class Contact
+    public class Contact : IMyEntity
     {
+        public Contact(){}
         public int ContactId { get; set; }
         public string? City { get; set; }
         public string? ResidentialComplex { get; set; }

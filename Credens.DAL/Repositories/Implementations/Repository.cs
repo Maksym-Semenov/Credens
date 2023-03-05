@@ -4,46 +4,99 @@ using AutoMapper.QueryableExtensions;
 using Credens.DAL.AutoMapper;
 using Credens.DAL.Domain.Entities;
 using Credens.DAL.EF;
-using Credens.Infrastructure.DTO;
+using Credens.DAL.Type_selection;
 using Credens.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
+
 namespace Credens.DAL.Repositories.Implementations
 {
-    public class ProjectRepository : IRepository<ProjectDTO>
+    public class Repository<T> : IRepository<T> where T : class, new()
     {
         private readonly IMapper _mapper;
-        private readonly DbSet<Project> _dbSet;
         private readonly CredensDbContext _context;
-        
-        public ProjectRepository(CredensDbContext context)
+  
+        public Repository(CredensDbContext context)
         {
-            _mapper = CredensMapper<Project, ProjectDTO>.MapperInit();
+            _mapper = CredensMapper<T>.MapperInit();
             _context = context;
-            _dbSet = context.Set<Project>();
         }
 
-        public ProjectDTO Get(Expression<Func<ProjectDTO, bool>> predicate)
+
+        public static DbSet<T> GetDbSet<T>(DbContext _context) where T : class
         {
-            return _dbSet.ProjectTo<ProjectDTO>(_mapper.ConfigurationProvider).Where(predicate).FirstOrDefault();
+          return  (DbSet<T>)_context.GetType().GetMethod("Set", types: Type.EmptyTypes).MakeGenericMethod(typeof(T)).Invoke(_context, null);
         }
 
-        public IQueryable<ProjectDTO> GetAll()
+        public T Get(Expression<Func<T, bool>> predicate)
         {
-            return _dbSet.ProjectTo<ProjectDTO>(_mapper.ConfigurationProvider);
+            Type t = typeof(T);
+            var _dbSet = _context.Set(t.GetType());
+            return  _dbSet.ProjectTo<T>(_mapper.ConfigurationProvider).Where(predicate).FirstOrDefault();
         }
 
-        public async Task<ProjectDTO> GetAsync(Expression<Func<ProjectDTO, bool>> predicate)
+        public IQueryable<T> GetAll()
         {
-            return await _dbSet.ProjectTo<ProjectDTO>(_mapper.ConfigurationProvider).Where(predicate).FirstOrDefaultAsync();
+            switch (typeof(TOut).ToString())
+            {
+                case "ProjectDTO":
+                    {
+                        DbSet<Project> _dbSet = _context.Set<Project>();
+                        return _dbSet.ProjectTo<TOut>(_mapper.ConfigurationProvider);
+                    }
+                case "BranchDTO":
+                    {
+                        DbSet<Branch> _dbSet = _context.Set<Branch>();
+                        return _dbSet.ProjectTo<TOut>(_mapper.ConfigurationProvider);
+                    }
+                case "ContactDTO":
+                    {
+                        DbSet<Contact> _dbSet = _context.Set<Contact>();
+                        return _dbSet.ProjectTo<TOut>(_mapper.ConfigurationProvider);
+                    }
+                case "UserDTO":
+                    {
+                        DbSet<User> _dbSet = _context.Set<User>();
+                        return _dbSet.ProjectTo<TOut>(_mapper.ConfigurationProvider);
+                    }
+                default:
+                    { throw new Exception(); }
+            }
         }
 
-        public async Task<IEnumerable<ProjectDTO>> GetListAsync()
+        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            var rezult = _mapper.Map<IEnumerable<ProjectDTO>>(await _dbSet.ToListAsync()); 
-            
-            return rezult;
+            switch (typeof(TOut).ToString())
+            {
+                case "ProjectDTO":
+                    {
+                        DbSet<Project> _dbSet = _context.Set<Project>();
+                        return await _dbSet.ProjectTo<TOut>(_mapper.ConfigurationProvider).Where(predicate).FirstOrDefaultAsync();
+                    }
+                case "BranchDTO":
+                    {
+                        DbSet<Branch> _dbSet = _context.Set<Branch>();
+                        return await _dbSet.ProjectTo<TOut>(_mapper.ConfigurationProvider).Where(predicate).FirstOrDefaultAsync();
+                    }
+                case "ContactDTO":
+                    {
+                        DbSet<Contact> _dbSet = _context.Set<Contact>();
+                        return await _dbSet.ProjectTo<TOut>(_mapper.ConfigurationProvider).Where(predicate).FirstOrDefaultAsync();
+                    }
+                case "UserDTO":
+                    {
+                        DbSet<User> _dbSet = _context.Set<User>();
+                        return await _dbSet.ProjectTo<TOut>(_mapper.ConfigurationProvider).Where(predicate).FirstOrDefaultAsync();
+                    }
+                default:
+                    { throw new Exception(); }
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetListAsync()
+        {
+            return _mapper.Map<IEnumerable<T>>(await _dbSet.ToListAsync()); 
         }
 
         public void SaveChanges()
@@ -56,35 +109,35 @@ namespace Credens.DAL.Repositories.Implementations
            await _context.SaveChangesAsync();
         }
 
-        public void Add(ProjectDTO entity)
+        public void Add(T entity)
         {
-            Project project =_mapper.Map<Project>(entity);
-            _dbSet.Add(project);
+            _dbSet.Add(_mapper.Map<T>(entity));
         }
 
-        public async Task AddAsync(ProjectDTO entity)
+        public async Task AddAsync(T entity)
         {
-            Project project = _mapper.Map<Project>(entity);
-            await _dbSet.AddAsync(project);
+            await _dbSet.AddAsync(_mapper.Map<T>(entity));
         }
 
           
-        public void Delete(ProjectDTO entity)
+        public void Delete(T entity)
         {
-            Project project = _mapper.Map<Project>(entity);
-            _dbSet.Remove(project);
+            _dbSet.Remove(_mapper.Map<T>(entity));
         }
 
-        public void DeleteRange(IEnumerable<ProjectDTO> entity)
+        public void DeleteRange(IEnumerable<T> entity)
         {
-            var entitys = _mapper.Map<IEnumerable<Project>>(entity);
+            var entitys = _mapper.Map<IEnumerable<T>>(entity);
             _dbSet.RemoveRange(entitys);
         }
 
-        public void Update(ProjectDTO entity)
+        public void Update(T entity)
         {
-            var newEntity = _mapper.Map<Project>(entity);
-            _dbSet.Update(newEntity);
+            _dbSet.Update(_mapper.Map<T>(entity));
         }
+
+
+        
+        
     }
 }

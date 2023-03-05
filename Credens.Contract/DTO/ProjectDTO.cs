@@ -1,7 +1,9 @@
 ﻿
+using Credens.Infrastructure.Interface;
+
 namespace Credens.Infrastructure.DTO
 {
-    public class ProjectDTO
+    public class ProjectDTO : IMyDTO
     {
         public int ProjectId { get; set; }
 
