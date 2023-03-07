@@ -1,15 +1,45 @@
-﻿@model IQueryable<Credens.Presentation.ViewModels.ProjectViewModel>
+﻿
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IQueryable<Credens.Presentation.ViewModels.ProjectViewModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-<h1>Projects_List</h1>
 
-@foreach(var obj in Model)
-{
-    <p>@obj.Name</p>
-    <p>@obj.Price</p>
-    <p>@obj.Id</p>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @(Html.DisplayNameFor(model => model.FirstOrDefault().OrderName))
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
+            </td>
+        </tr>
 }
+    </tbody>
+</table>

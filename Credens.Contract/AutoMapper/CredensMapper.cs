@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using Credens.DAL.Domain.Entities;
-using Credens.DAL.Type_selection;
-using Credens.Infrastructure.DTO;
 
-namespace Credens.DAL.AutoMapper
+namespace Credens.Infrastructure.AutoMapper
 {
     public class CredensMapper<K,T> where T : class, new()
     {

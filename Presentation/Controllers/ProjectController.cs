@@ -1,11 +1,12 @@
 ﻿
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Credens.Infrastructure.AutoMapper;
 using Credens.Infrastructure.DTO;
 using Credens.Infrastructure.Interface;
-using Credens.Presentation.AutoMapper;
 using Credens.Presentation.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Credens.Presentation.Controllers
 {
@@ -13,11 +14,13 @@ namespace Credens.Presentation.Controllers
     {
         private readonly IService<ProjectDTO> _service;
         private readonly IMapper _mapper;
+        private readonly IMapper _mapper2;
 
         public ProjectController(IService<ProjectDTO> service)
         {
             _service = service;
-            _mapper = ProjectDTOMupToProjectViewModel.InitAutomapper();
+            _mapper = CredensMapper<ProjectDTO, ProjectViewModel>.MapperInit();
+            _mapper2 = CredensMapper<ProjectViewModel, ProjectDTO>.MapperInit();
         }
 
         [HttpGet]
@@ -36,49 +39,54 @@ namespace Credens.Presentation.Controllers
             return View(rez);
         }
 
-        //[HttpGet]
-        //public IActionResult GetById(int id)
-        //{
-        //    var project = _service.Get(x => x.ProjectId == id);
-        //    return View(project);
-        //}
 
-        //[HttpGet]
-        //public async Task<IActionResult> Index() 
-        //{
-        //    var rez = await _service.GetList();
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-        //     return View(rez.Data);
-        //}
+        [HttpPost]
+        public  IActionResult Create([Bind("OrderName, Price")]ProjectViewModel entity)
+        {
+            if (ModelState.IsValid)
+            {
+                var _entity = _mapper2.Map<ProjectDTO>(entity);
+                 //_service.CreateAsync(_entity);
+                _service.Create(_entity);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(entity);
+        }
 
-        //[HttpGet]
-        //public IActionResult MyGetByName(string name)
-        //{
-        //    var rez = _service.GetAll().Data.Where(x => x.OrderName == name);
+        
+        [HttpGet]
+        // GET: 
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return Problem(nameof(Index));
+            }
+            ProjectDTO projectDTO = _service.GetAll().Where(x => x.ProjectId == id).FirstOrDefault();
+            if (projectDTO == null)
+            {
+                return Problem(nameof(Index));
+            }
+            return View(projectDTO);
+        }
 
-        //    return View(rez);
-        //}
+        // POST:
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            ProjectDTO project = _service.GetAll().Where(x => x.ProjectId == id).FirstOrDefault();
+            _service.Delete(project);
+            
+            return RedirectToAction("Index");
+        }
 
-
-
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> Create([Bind("ProjectId, OrderValue, OrderMonth, OrderYear, CustomerId," +
-        //    " OrderName, Price, City, ResidentialComplex, TypeStreet, Street, BuildingNumber, Litera, BuildingPart, " +
-        //    "Apartment, Floor, ManagerId, MakerId, BranchId")]Project entity)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _service.CreateAsync(entity);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(entity);
-        //}
 
     }
 }

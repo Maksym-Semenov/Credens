@@ -1,9 +1,9 @@
 ﻿
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Credens.DAL.AutoMapper;
 using Credens.DAL.Domain.Entities;
 using Credens.DAL.EF;
+using Credens.Infrastructure.AutoMapper;
 using Credens.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -21,7 +21,7 @@ namespace Credens.DAL.Repositories.Implementations
         {
             _context = context;
 
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -53,7 +53,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public T Get(Expression<Func<T, bool>> predicate)
         {
-          switch (typeof(T).ToString())
+          switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -81,7 +81,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public IQueryable<T> GetAll()
         {
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -109,7 +109,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -137,7 +137,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public async Task<IEnumerable<T>> GetListAsync()
         {
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -176,7 +176,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public void Add(T entity)
         {
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -209,7 +209,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public async Task AddAsync(T entity)
         {
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -241,7 +241,7 @@ namespace Credens.DAL.Repositories.Implementations
         
         public void Delete(T entity)
         {
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -274,7 +274,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public void DeleteRange(IEnumerable<T> entity)
         {
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {
@@ -311,7 +311,7 @@ namespace Credens.DAL.Repositories.Implementations
 
         public void Update(T entity)
         {
-            switch (typeof(T).ToString())
+            switch (typeof(T).Name.ToString())
             {
                 case "ProjectDTO":
                     {

@@ -9,13 +9,13 @@ namespace Credens.Infrastructure.Interface
         
         public Task CreateAsync(T entity);
 
-        public IQueryable<ProjectDTO> GetAll();
+        public IQueryable<T> GetAll();
 
-        public Task<IEnumerable<ProjectDTO>> GetListAsync();
+        public Task<IEnumerable<T>> GetListAsync();
 
-        public Task<ProjectDTO> GetAsync(Expression<Func<T, bool>> predicate);
+        public Task<T> GetAsync(Expression<Func<T, bool>> predicate);
 
-        public ProjectDTO Get(Expression<Func<T, bool>> predicate);
+        public T Get(Expression<Func<T, bool>> predicate);
 
         public void Delete(T entity);
 
